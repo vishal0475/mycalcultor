@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Calculator</title>
+    <style>
+        h1{
+            color: whitesmoke;
+            background-color: rgb(255, 64, 64);
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            padding: 20px;
+            margin: 0px;
+        }
+
+        nav{
+            background-color: rgb(228, 226, 226);
+            padding: 10px;
+        }
+        nav a{
+            padding: 20px;
+            text-decoration: none;
+            color: black;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        #mainContainer{
+            margin-top: 5px;
+            display: grid;
+            grid-template-columns: 1fr 3.6fr;
+            gap: 5px;
+        }
+
+        #sideBar{
+            background-color:rgb(228, 226, 226) ;
+        }
+        
+        #sidebarOption{
+            padding-left: 0px;
+            margin: 0px;
+        }
+        #sidebarOption > li{
+            padding: 20px;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            list-style-type: none;
+        }
+        #sidebarOption > li:hover{
+            background-color: rgb(172, 168, 168);
+        }
+        #sidebarOption > li > a{
+            text-decoration: none;
+            color: rgb(56, 56, 56);
+            font-weight: 600;
+            font-size: 17px;
+        }
+
+        /*calculator CSS*/
+
+        #calculatorArea{
+            background-color: rgb(228, 226, 226);
+        }
+
+        #screen{
+            margin: 10px;
+            text-align: right;
+            font-size: 30px;
+            font-family: Verdana;
+            border: none;
+            padding-top: 100px;
+            padding-left: 58%;
+            padding-right: 10px;
+        }
+
+        /* Buttons*/
+        #buttonArea{
+            margin: 10px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+
+        #buttonArea > div{
+            text-align: center;
+            padding: 8px;
+        }
+        #buttonArea > div > button{
+            
+            padding-left: 50px;
+            padding-right: 50px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            font-size: 25px;
+            font-family: Verdana;
+            font-weight: 600;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>
+        CALCULATOR
+    </h1>
+    <nav>
+        <a href="#">Home</a>
+        <a style="background-color: rgb(135, 135, 136); padding: 10px;" href="#">Calculator</a>
+        <a href="calender.html">Calender</a>
+        <a href="#">Timer</a>
+        <a href="#">Stopwatch</a>
+    </nav>
+    <div id="mainContainer">
+        <div id="sideBar">
+            <ul id="sidebarOption">
+                <li style=" color:white; text-align: center; padding-left: 0px; background-color: rgb(255, 64, 64); font-weight: 600;">OPTIONS</li>
+                <li><a href="#">Satatical Calculator</a></li>
+                <li><a href="#">Scientific Calculator</a></li>
+                <li><a href="#">Unit Convertor</a></li>
+            </ul>
+        </div>
+        <div id="calculatorArea">
+           
+            <input id="screen" type="text" name="screen">
+           
+            <div id="buttonArea">
+                <div><button >←</button></div>
+                <div><button style="padding-left: 40px; padding-right: 40px;" >AC</button></div>
+                <div><button >&radic;</button></div>
+                <div><button style="padding-left: 49px; padding-right: 49px;">+</button></div>
+                <div><button >7</button></div>
+                <div><button >8</button></div>
+                <div><button >9</button></div>
+                <div><button onclick="myNumber()" style="padding-right: 53px; padding-left: 53px;" id="bSubtraction">-</button></div>
+                <div><button >4</button></div>
+                <div><button >5</button></div>
+                <div><button >6</button></div>
+                <div><button id="bMultiply">&#xd7;</button></div>
+                <div><button >1</button></div>
+                <div><button >2</button></div>
+                <div><button >3</button></div>
+                <div><button id="bDivid">&#247;</button></div>
+                <div><button style="padding-left: 55px; padding-right: 55px;" id="bPoint">.</button></div>
+                <div><button >0</button></div>
+                <div><button style="padding-right: 44px; padding-left: 44px;" >%</button></div>
+                <div><button style="background-color: rgb(236, 44, 44);" >=</button></div>
+           </div>
+    </div>
+</body>
+
+<script>
+    console.log('This is a Calculator Code.');
+
+    let screen = document.getElementById('screen');
+    buttons = document.querySelectorAll('button');
+    let screenValue ='';
+    for(item of buttons){
+        item.addEventListener('click', (e)=>{
+            buttonText = e.target.innerText;
+            console.log('button Text is', buttonText);
+
+            if(buttonText == '×'){
+                buttonText = '*';
+                screenValue += buttonText;
+                screen.value =screenValue;
+            }
+            else if(buttonText == '='){
+                screen.value = eval(screenValue);
+            }
+            else if(buttonText == 'AC'){
+                screenValue = '';
+                screen.value = screenValue;
+            }
+            else if(buttonText == '÷'){
+                buttonText = '/';
+                screenValue += buttonText;
+                screen.value = screenValue;
+            }
+            else if(buttonText == '-'){
+                buttonText = '-';
+                screenValue += buttonText;
+                screen.value = screenValue;
+            }
+            else if(buttonText == '%'){
+                buttonText = '/100';
+                screenValue += buttonText;
+                screen.value = screenValue;
+                screen.value = eval(screenValue);
+            }
+            else if(buttonText == '←'){
+                screenValue = screen.value.slice(0,screen.value.length-1);
+                screen.value = screenValue;
+            }
+            else{
+                screenValue += buttonText;
+                screen.value = screenValue;
+            }
+        })
+    }
+
+</script>
+
+</html>
